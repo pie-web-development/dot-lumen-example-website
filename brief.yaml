@@ -1,0 +1,93 @@
+# =============================================================================
+# CLIENT BRIEF
+# =============================================================================
+# Fill in everything you have. Leave fields empty (or omit list items) to hide
+# that section from the final site. Strings can use double quotes if they
+# contain colons or special characters.
+#
+# When you're done, run:  /build
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# 1. IDENTITY  — who they are
+# -----------------------------------------------------------------------------
+identity:
+  name: ""                # Business name, e.g. "Cabinet Dental Smile"
+  tagline: ""             # One sentence. Concrete outcome > slogan.
+  language: ro            # ro | en
+  industry: ""            # Free text. e.g. dental clinic, restaurant, law firm,
+                          # gym, salon, e-shop, SaaS, real estate, etc.
+                          # Drives default typography + imagery choices.
+  logo: ""                # Path in assets/, e.g. "logo.svg". Leave empty to
+                          # use a text logo built from `name`.
+
+
+# -----------------------------------------------------------------------------
+# 2. CONTACT  — drives footer + contact page + primary CTA
+# -----------------------------------------------------------------------------
+contact:
+  phone: ""               # International format preferred: "+40 712 345 678"
+  email: ""
+  address: ""             # Full street address; map embeds if filled.
+  hours: ""               # Free text. e.g. "Lun-Vin 9:00-18:00"
+  socials:
+    instagram: ""         # Full URL
+    facebook: ""
+    tiktok: ""
+    linkedin: ""
+  primary_cta: call       # call | whatsapp | book | email | order | quote
+  whatsapp_number: ""     # Required if primary_cta = whatsapp. Digits only.
+
+
+# -----------------------------------------------------------------------------
+# 3. OFFERING  — products / services
+# -----------------------------------------------------------------------------
+offering:
+  intro: ""               # Optional "what we do" paragraph shown above items.
+  items:                  # Remove items you don't need. Empty list = no section.
+    - name: ""
+      description: ""     # 1-2 sentences.
+      price: ""           # Optional. Include currency: "120 RON", "from €49".
+      image: ""           # Optional. Path in assets/, e.g. "services/clean.jpg"
+
+
+# -----------------------------------------------------------------------------
+# 4. POSITIONING  — drives hero + "why us" section
+# -----------------------------------------------------------------------------
+positioning:
+  audience: ""            # Who it's for, in one line.
+  benefits:               # 3-5 concrete outcomes the visitor gets.
+    - ""
+    - ""
+    - ""
+
+
+# -----------------------------------------------------------------------------
+# 5. TRUST  — optional. Sections hide if empty.
+# -----------------------------------------------------------------------------
+trust:
+  testimonials:
+    - quote: ""
+      name: ""
+      role: ""            # Optional. e.g. "Client din 2022"
+  gallery: ""              # Folder name in assets/, e.g. "gallery".
+                           # All images inside are shown in a grid.
+
+
+# -----------------------------------------------------------------------------
+# 6. VISUAL DIRECTION  — how the site should feel
+# -----------------------------------------------------------------------------
+visual:
+  reference_url: ""       # 1 site whose feel matches. Strongest signal.
+  vibe: ""                # 2-3 words. e.g. "warm minimal", "bold brutalist",
+                          #               "clinical premium", "earthy editorial"
+  brand_color: ""         # Hex like "#0E5C3A", or leave empty and I'll pick.
+
+
+# -----------------------------------------------------------------------------
+# 7. META  — SEO basics
+# -----------------------------------------------------------------------------
+meta:
+  domain: ""              # Final domain, e.g. "smiledental.ro". Used for
+                          # canonical + sitemap. Custom domain assumed.
