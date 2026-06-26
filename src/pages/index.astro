@@ -1,0 +1,70 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Testimonials from "../components/Testimonials.astro";
+import AtmosphereBlock from "../components/AtmosphereBlock.astro";
+import FinalCta from "../components/FinalCta.astro";
+import Footer from "../components/Footer.astro";
+import { services } from "../lib/data";
+
+const featuredServices = services.slice(0, 3);
+---
+
+<Base title="Cabinet Dental Lumen · Stomatologie modernă în Cluj-Napoca">
+  <Nav current="home" />
+  <main id="main">
+    <Hero />
+
+    <section class="bg-paper py-24 md:py-32">
+      <div class="container-x">
+        <div class="mb-12 flex flex-wrap items-end justify-between gap-6 md:mb-16">
+          <h2 class="font-display text-[30px] leading-[1.1] tracking-tight text-ink md:text-[42px]">
+            Ce facem, pe scurt.
+          </h2>
+          <a
+            href="/servicii"
+            class="inline-flex items-center gap-2 text-[14px] font-medium text-brand hover:text-brand-deep"
+          >
+            Toate serviciile și prețurile
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+              <path d="M0 5H12.5M8 1L13 5L8 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <ul class="grid grid-cols-1 gap-y-1">
+          {
+            featuredServices.map((s, i) => (
+              <li class="group">
+                <a href="/servicii" class="flex items-start gap-6 border-t border-hairline py-6 transition hover:bg-elevated/40 md:gap-10 md:py-8">
+                  <span class="shrink-0 pt-1 font-sans text-[12px] tracking-[0.22em] text-muted">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div class="flex-1">
+                    <h3 class="font-display text-[22px] leading-tight tracking-tight text-ink md:text-[28px]">
+                      {s.name}
+                    </h3>
+                    <p class="mt-2 max-w-prose text-[14px] leading-relaxed text-muted md:text-[15px]">
+                      {s.description}
+                    </p>
+                  </div>
+                  <span class="hidden shrink-0 self-center text-muted transition group-hover:text-brand md:block">
+                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+                      <path d="M0 7H18M13 1L19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <Testimonials variant="featured-only" />
+    <AtmosphereBlock />
+    <FinalCta />
+  </main>
+  <Footer />
+</Base>

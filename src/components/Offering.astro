@@ -1,0 +1,57 @@
+---
+import { services, site } from "../lib/data";
+
+interface Props {
+  withHeader?: boolean;
+  withCta?: boolean;
+}
+const { withHeader = true, withCta = true } = Astro.props;
+---
+
+<section id="servicii" class="bg-elevated/60 py-24 md:py-36">
+  <div class="container-x">
+    {
+      withHeader && (
+        <div class="mb-16 max-w-2xl md:mb-20">
+          <h2 class="font-display text-[34px] leading-[1.1] tracking-tight text-ink md:text-[44px]">
+            Tratamente complete, fără pachete surprinzătoare.
+          </h2>
+          <p class="mt-5 max-w-prose text-[17px] leading-relaxed text-muted">
+            Tot ce se face într-un cabinet de încredere, explicat pe înțelesul tău și planificat în vizite pe care le poți duce.
+          </p>
+        </div>
+      )
+    }
+
+    <ul class="grid grid-cols-1 gap-x-12 gap-y-2 md:grid-cols-2">
+      {
+        services.map((item) => (
+          <li class="group border-t border-hairline py-7">
+            <div class="flex items-baseline justify-between gap-6">
+              <h3 class="font-display text-[22px] leading-tight tracking-tight text-ink md:text-[24px]">
+                {item.name}
+              </h3>
+              {item.price && (
+                <span class="shrink-0 rounded-full border border-hairline bg-paper px-3 py-1 font-sans text-[12px] tracking-wide text-ink">
+                  {item.price}
+                </span>
+              )}
+            </div>
+            <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-muted">{item.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      withCta && (
+        <div class="mt-16 flex flex-wrap items-center gap-4 border-t border-hairline pt-10">
+          <p class="text-[15px] text-muted">
+            Nu ești sigur ce ai nevoie? Începem cu o consultație și un plan scris.
+          </p>
+          <a href={site.phoneHref} class="btn-primary">Rezervă consultația</a>
+        </div>
+      )
+    }
+  </div>
+</section>

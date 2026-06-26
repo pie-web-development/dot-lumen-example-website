@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    @apply bg-brand text-paper;
+  }
+
+  h1, h2, h3 {
+    @apply font-display tracking-tight text-balance;
+    font-feature-settings: "lnum" 1, "kern" 1;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1240px] px-6 md:px-10;
+  }
+
+  .hairline {
+    @apply border-t border-hairline;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-y-[1px];
+  }
+
+  .btn-primary {
+    @apply btn bg-brand text-paper hover:bg-brand-deep;
+  }
+
+  .btn-ghost {
+    @apply btn border border-hairline bg-transparent text-ink hover:border-ink/30;
+  }
+
+  .eyebrow {
+    @apply font-sans text-[11px] uppercase tracking-[0.22em] text-muted;
+  }
+}

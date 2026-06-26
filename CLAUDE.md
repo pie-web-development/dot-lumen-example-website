@@ -6,6 +6,7 @@ This repo is **cloned per client**. The single source of truth is `brief.yaml` a
 
 When the user runs `/build` (or asks you to "build the site"):
 
+0. **Read `.claude/build-lessons.md` first.** It's a cumulative notebook of what bit me in past builds — version pins, rules I keep missing, design choices to rotate, scaffolding pitfalls. Skipping it means re-paying for lessons already paid for.
 1. **Read `brief.yaml`** end-to-end. Treat empty fields and empty lists as "hide that section". Validate that `identity.name`, `identity.tagline`, `identity.language`, `contact.phone` or `contact.email`, and at least one of `offering.items` / `positioning.benefits` are filled. If anything required is missing, list it and stop.
 2. **Scan `assets/`** to know which images exist. For any field that references a missing asset, plan a stock fallback (Unsplash) appropriate to `identity.industry` + `visual.vibe`.
 3. **Make design decisions** before writing code. Use the `design-taste-frontend` skill. Inputs: `industry`, `vibe`, `reference_url`, `brand_color`, `language`. Outputs: typography pair, palette, layout density, hero variant (image-led / type-led / split), section rhythm. Write the decisions down briefly before coding.

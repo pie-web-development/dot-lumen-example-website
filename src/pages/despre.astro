@@ -1,0 +1,83 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import PageHero from "../components/PageHero.astro";
+import WhyUs from "../components/WhyUs.astro";
+import Testimonials from "../components/Testimonials.astro";
+import FinalCta from "../components/FinalCta.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../lib/data";
+---
+
+<Base
+  title="De ce noi · Cabinet Dental Lumen"
+  description="Echipă fixă, planuri scrise, programări la oră fixă. Cum lucrăm la Cabinet Dental Lumen, în centrul Clujului."
+  path="/despre"
+>
+  <Nav current="despre" />
+
+  <main id="main">
+    <PageHero
+      eyebrow="De ce noi"
+      title="Un cabinet în care vrei să revii."
+      italicWord="vrei să revii"
+      intro="Suntem un cabinet mic, cu echipă fixă, ales de pacienți care vor stomatologie făcută cu cap și fără presiune. Mai jos găsești cum lucrăm și ce te poți aștepta să primești la noi."
+      image={site.images.despreHero}
+      imageAlt="Lumină naturală în cabinetul Lumen"
+    />
+
+    <WhyUs withHeader={false} />
+
+    <section class="bg-elevated/40 py-24 md:py-32">
+      <div class="container-x">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-x-16">
+          <div class="md:col-span-7">
+            <div class="relative aspect-[5/4] w-full overflow-hidden rounded-[2px] bg-elevated">
+              <img
+                src={site.images.despreInterior}
+                alt=""
+                width="1200"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+          <div class="md:col-span-5 md:self-center">
+            <h2 class="font-display text-[28px] leading-[1.15] tracking-tight text-ink md:text-[36px]">
+              Lucrăm cu instrumentar curat și protocoale clare.
+            </h2>
+            <p class="mt-5 max-w-prose text-[16px] leading-relaxed text-muted">
+              Sterilizarea se face în cabinet, după protocoale verificate periodic. Folosim materiale de la furnizori europeni cu trasabilitate, iar la implanturi lucrăm exclusiv cu sisteme cu garanție pe viață a fixturii.
+            </p>
+            <ul class="mt-7 grid grid-cols-2 gap-x-6 gap-y-4">
+              <li>
+                <p class="font-display text-[28px] leading-none tracking-tight text-brand md:text-[34px]">3D</p>
+                <p class="mt-1 text-[13px] leading-snug text-muted">Radiografie panoramică și CBCT în cabinet</p>
+              </li>
+              <li>
+                <p class="font-display text-[28px] leading-none tracking-tight text-brand md:text-[34px]">EN ISO</p>
+                <p class="mt-1 text-[13px] leading-snug text-muted">Protocol de sterilizare cu raportare lunară</p>
+              </li>
+              <li>
+                <p class="font-display text-[28px] leading-none tracking-tight text-brand md:text-[34px]">7 ani</p>
+                <p class="mt-1 text-[13px] leading-snug text-muted">De când lucrăm cu aceeași echipă</p>
+              </li>
+              <li>
+                <p class="font-display text-[28px] leading-none tracking-tight text-brand md:text-[34px]">Mereu</p>
+                <p class="mt-1 text-[13px] leading-snug text-muted">Plan scris înainte de orice manoperă</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Testimonials variant="split" />
+
+    <FinalCta />
+  </main>
+
+  <Footer />
+</Base>

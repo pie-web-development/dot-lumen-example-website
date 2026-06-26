@@ -1,0 +1,46 @@
+---
+import { site } from "../lib/data";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-hairline bg-paper py-16">
+  <div class="container-x grid grid-cols-1 gap-y-10 md:grid-cols-12 md:gap-x-12">
+    <div class="md:col-span-5">
+      <p class="font-display text-[28px] leading-none tracking-tight text-ink">
+        <span class="italic text-brand">Lumen</span>.<span class="ml-1 text-[15px] tracking-wide text-muted">Cabinet Dental</span>
+      </p>
+      <p class="mt-5 max-w-prose text-[15px] leading-relaxed text-muted">
+        Cabinet stomatologic în centrul Clujului, pentru adulți și familii care vor un cabinet în care să revină ani la rând.
+      </p>
+    </div>
+
+    <div class="md:col-span-3">
+      <p class="eyebrow mb-4">Cabinet</p>
+      <ul class="space-y-2 text-[14px] text-ink">
+        <li><a href="/" class="hover:text-brand">Acasă</a></li>
+        <li><a href="/servicii" class="hover:text-brand">Servicii</a></li>
+        <li><a href="/despre" class="hover:text-brand">De ce noi</a></li>
+        <li><a href="/contact" class="hover:text-brand">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="md:col-span-4">
+      <p class="eyebrow mb-4">Contact</p>
+      <ul class="space-y-2 text-[14px] text-ink">
+        <li><a href={site.phoneHref} class="hover:text-brand">{site.phone}</a></li>
+        <li><a href={site.emailHref} class="hover:text-brand">{site.email}</a></li>
+        <li class="text-muted">{site.address}</li>
+      </ul>
+      <ul class="mt-5 flex items-center gap-4 text-[13px]">
+        <li><a href={site.socials.instagram} class="text-muted hover:text-brand" rel="noreferrer noopener" target="_blank">Instagram</a></li>
+        <li class="text-hairline">·</li>
+        <li><a href={site.socials.facebook} class="text-muted hover:text-brand" rel="noreferrer noopener" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container-x mt-12 flex flex-col items-start justify-between gap-3 border-t border-hairline pt-6 text-[12px] text-muted md:flex-row md:items-center">
+    <p>&copy; {year} {site.name}. Toate drepturile rezervate.</p>
+    <p>Cluj-Napoca, România</p>
+  </div>
+</footer>

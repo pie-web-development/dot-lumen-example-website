@@ -1,0 +1,82 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import PageHero from "../components/PageHero.astro";
+import Offering from "../components/Offering.astro";
+import FinalCta from "../components/FinalCta.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../lib/data";
+---
+
+<Base
+  title="Servicii și prețuri · Cabinet Dental Lumen"
+  description="Consultații, igienizare, albire, implanturi, stomatologie pediatrică. Prețuri clare, plan scris, fără pachete surprinzătoare."
+  path="/servicii"
+>
+  <Nav current="servicii" />
+
+  <main id="main">
+    <PageHero
+      eyebrow="Servicii și prețuri"
+      title="Tot ce ai nevoie sub același acoperiș."
+      italicWord="același acoperiș"
+      intro="Adulți și copii, urgențe și planuri lungi. Mai jos vezi serviciile pe care le facem zilnic și prețurile la zi. Nu vei plăti niciodată mai mult decât scrie pe plan."
+      image={site.images.serviciiHero}
+      imageAlt="Detaliu cabinet stomatologic Lumen"
+    />
+
+    <Offering withHeader={false} withCta={false} />
+
+    <section class="bg-paper py-24 md:py-32">
+      <div class="container-x">
+        <div class="grid grid-cols-1 gap-y-10 md:grid-cols-12 md:gap-x-16">
+          <div class="md:col-span-4">
+            <p class="eyebrow mb-5">Prima vizită</p>
+            <h2 class="font-display text-[28px] leading-[1.15] tracking-tight text-ink md:text-[36px]">
+              Cum decurge consultația.
+            </h2>
+          </div>
+          <div class="md:col-span-8">
+            <ol class="divide-y divide-hairline">
+              {
+                [
+                  {
+                    title: "Discuție și anamneză (10 min)",
+                    body: "Ne spui ce te aduce, ce ai mai făcut, ce te îngrijorează. Fără grabă.",
+                  },
+                  {
+                    title: "Examen clinic și radiografie 3D (15 min)",
+                    body: "Verificăm fiecare dinte, gingii, ocluzie. Radiografia o facem aici, în cabinet.",
+                  },
+                  {
+                    title: "Plan scris (5 min)",
+                    body: "Îți explicăm ce am găsit și îți dăm un plan cu prioritățile și prețurile pe hârtie, să îl iei acasă.",
+                  },
+                ].map((step, i) => (
+                  <li class="flex gap-6 py-6 first:pt-0 last:pb-0 md:gap-10">
+                    <span class="shrink-0 font-display text-[22px] leading-none text-brand md:text-[26px]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 class="font-display text-[20px] leading-snug tracking-tight text-ink md:text-[22px]">
+                        {step.title}
+                      </h3>
+                      <p class="mt-2 max-w-prose text-[15px] leading-relaxed text-muted">{step.body}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+            <p class="mt-8 text-[14px] text-muted">
+              Consultația costă 150 RON și include radiografia panoramică.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FinalCta />
+  </main>
+
+  <Footer />
+</Base>

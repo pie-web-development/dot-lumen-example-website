@@ -1,0 +1,44 @@
+---
+import { benefits } from "../lib/data";
+
+interface Props {
+  withHeader?: boolean;
+}
+const { withHeader = true } = Astro.props;
+---
+
+<section id="despre" class="bg-paper py-24 md:py-36">
+  <div class="container-x">
+    <div class="grid grid-cols-1 gap-y-12 md:grid-cols-12 md:gap-x-12">
+      {
+        withHeader && (
+          <div class="md:col-span-4">
+            <p class="eyebrow mb-5">De ce noi</p>
+            <h2 class="font-display text-[34px] leading-[1.1] tracking-tight text-ink md:text-[44px]">
+              Pentru pacienții care vor să revină <span class="italic text-brand">ani la rând</span>.
+            </h2>
+          </div>
+        )
+      }
+      <div class:list={[withHeader ? "md:col-span-8" : "md:col-span-12"]}>
+        <ol class="divide-y divide-hairline">
+          {
+            benefits.map((b, i) => (
+              <li class="flex gap-6 py-7 first:pt-0 last:pb-0 md:gap-10">
+                <span class="shrink-0 font-display text-[22px] leading-none text-brand md:text-[26px]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 class="font-display text-[22px] leading-snug tracking-tight text-ink md:text-[26px]">
+                    {b.title}
+                  </h3>
+                  <p class="mt-2 max-w-prose text-[15px] leading-relaxed text-muted">{b.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

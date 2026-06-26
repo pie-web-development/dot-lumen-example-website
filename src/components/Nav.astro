@@ -1,0 +1,106 @@
+---
+import { site } from "../lib/data";
+
+interface Props {
+  current?: "home" | "servicii" | "despre" | "contact";
+}
+const { current = "home" } = Astro.props;
+
+const items: { label: string; href: string; key: NonNullable<Props["current"]> }[] = [
+  { label: "Acasă", href: "/", key: "home" },
+  { label: "Servicii", href: "/servicii", key: "servicii" },
+  { label: "De ce noi", href: "/despre", key: "despre" },
+  { label: "Contact", href: "/contact", key: "contact" },
+];
+---
+
+<div data-nav-sentinel aria-hidden="true" class="h-px"></div>
+
+<header
+  class="sticky top-0 z-40 border-b border-transparent bg-paper/85 backdrop-blur supports-[backdrop-filter]:bg-paper/70 transition-[border-color,background-color] duration-200 data-[scrolled=true]:border-hairline"
+  data-nav
+>
+  <div class="container-x flex h-16 items-center justify-between md:h-[72px]">
+    <a
+      href="/"
+      class="font-display text-[20px] leading-none tracking-tight text-ink md:text-[22px]"
+      aria-label={`${site.name}, mergi la pagina de start`}
+    >
+      <span class="italic text-brand">Lumen</span><span class="text-ink">.</span>
+      <span class="ml-1 hidden text-[14px] tracking-wide text-muted md:inline">Cabinet Dental</span>
+    </a>
+
+    <nav class="hidden items-center gap-7 md:flex" aria-label="Navigare principală">
+      {
+        items.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "text-[14px] transition",
+              item.key === current ? "text-ink" : "text-ink/70 hover:text-ink",
+            ]}
+            aria-current={item.key === current ? "page" : undefined}
+          >
+            {item.label}
+            {item.key === current && (
+              <span class="ml-1 inline-block h-1 w-1 rounded-full bg-brand align-middle" aria-hidden="true" />
+            )}
+          </a>
+        ))
+      }
+      <a href={site.phoneHref} class="btn-primary px-5 py-2.5 text-[13px]">
+        Rezervă consultația
+      </a>
+    </nav>
+
+    <details class="relative md:hidden">
+      <summary
+        class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-hairline text-ink"
+        aria-label="Deschide meniul"
+      >
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+          <path d="M0 1H18M0 7H18M0 13H18" stroke="currentColor" stroke-width="1.5" />
+        </svg>
+      </summary>
+      <div
+        class="absolute right-0 top-12 w-60 rounded-md border border-hairline bg-paper p-4 shadow-[0_24px_60px_-30px_rgba(27,37,33,0.35)]"
+      >
+        <ul class="space-y-1">
+          {
+            items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    "block rounded px-3 py-2 text-[15px] transition",
+                    item.key === current
+                      ? "bg-elevated text-ink"
+                      : "text-ink hover:bg-elevated",
+                  ]}
+                  aria-current={item.key === current ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={site.phoneHref} class="btn-primary mt-3 w-full text-[13px]">Rezervă consultația</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  const sentinel = document.querySelector<HTMLElement>("[data-nav-sentinel]");
+  if (nav && sentinel) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        nav.dataset.scrolled = entry.isIntersecting ? "false" : "true";
+      },
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+  }
+</script>

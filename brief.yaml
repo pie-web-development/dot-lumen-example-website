@@ -1,93 +1,76 @@
 # =============================================================================
-# CLIENT BRIEF
-# =============================================================================
-# Fill in everything you have. Leave fields empty (or omit list items) to hide
-# that section from the final site. Strings can use double quotes if they
-# contain colons or special characters.
-#
-# When you're done, run:  /build
+# CLIENT BRIEF  — Cabinet Dental Lumen (fictional, dry-run)
 # =============================================================================
 
-
-# -----------------------------------------------------------------------------
-# 1. IDENTITY  — who they are
-# -----------------------------------------------------------------------------
 identity:
-  name: ""                # Business name, e.g. "Cabinet Dental Smile"
-  tagline: ""             # One sentence. Concrete outcome > slogan.
-  language: ro            # ro | en
-  industry: ""            # Free text. e.g. dental clinic, restaurant, law firm,
-                          # gym, salon, e-shop, SaaS, real estate, etc.
-                          # Drives default typography + imagery choices.
-  logo: ""                # Path in assets/, e.g. "logo.svg". Leave empty to
-                          # use a text logo built from `name`.
+  name: "Cabinet Dental Lumen"
+  tagline: "Stomatologie modernă în centrul Clujului, fără grabă și fără frică."
+  language: ro
+  industry: "dental clinic"
+  logo: ""
 
-
-# -----------------------------------------------------------------------------
-# 2. CONTACT  — drives footer + contact page + primary CTA
-# -----------------------------------------------------------------------------
 contact:
-  phone: ""               # International format preferred: "+40 712 345 678"
-  email: ""
-  address: ""             # Full street address; map embeds if filled.
-  hours: ""               # Free text. e.g. "Lun-Vin 9:00-18:00"
+  phone: "+40 364 123 456"
+  email: "salut@dentallumen.ro"
+  address: "Strada Avram Iancu 14, Cluj-Napoca"
+  hours: "Luni–Vineri 9:00–19:00 · Sâmbătă 10:00–14:00"
   socials:
-    instagram: ""         # Full URL
-    facebook: ""
+    instagram: "https://instagram.com/dentallumen"
+    facebook: "https://facebook.com/dentallumen"
     tiktok: ""
     linkedin: ""
-  primary_cta: call       # call | whatsapp | book | email | order | quote
-  whatsapp_number: ""     # Required if primary_cta = whatsapp. Digits only.
+  primary_cta: book
+  whatsapp_number: ""
 
-
-# -----------------------------------------------------------------------------
-# 3. OFFERING  — products / services
-# -----------------------------------------------------------------------------
 offering:
-  intro: ""               # Optional "what we do" paragraph shown above items.
-  items:                  # Remove items you don't need. Empty list = no section.
-    - name: ""
-      description: ""     # 1-2 sentences.
-      price: ""           # Optional. Include currency: "120 RON", "from €49".
-      image: ""           # Optional. Path in assets/, e.g. "services/clean.jpg"
+  intro: "Tratamente complete pentru adulți și copii, într-un cabinet liniștit, cu echipă fixă și planuri de tratament explicate clar."
+  items:
+    - name: "Consultație și plan personalizat"
+      description: "30 de minute pentru evaluare, radiografie panoramică și un plan scris pe care îl primești acasă."
+      price: "150 RON"
+      image: ""
+    - name: "Igienizare profesională"
+      description: "Detartraj cu ultrasunete, airflow și fluorizare. Fără disconfort, fără grabă."
+      price: "250 RON"
+      image: ""
+    - name: "Albire profesională"
+      description: "Albire în cabinet cu protocol german, două ședințe, rezultat de durată."
+      price: "1.200 RON"
+      image: ""
+    - name: "Implant dentar"
+      description: "Implanturi premium cu garanție pe viață a fixturii. Ghidare digitală pentru precizie."
+      price: "de la 3.500 RON"
+      image: ""
+    - name: "Stomatologie pediatrică"
+      description: "Programări dedicate pentru copii, într-un ritm pe care îl pot duce."
+      price: ""
+      image: ""
 
-
-# -----------------------------------------------------------------------------
-# 4. POSITIONING  — drives hero + "why us" section
-# -----------------------------------------------------------------------------
 positioning:
-  audience: ""            # Who it's for, in one line.
-  benefits:               # 3-5 concrete outcomes the visitor gets.
-    - ""
-    - ""
-    - ""
+  audience: "Adulți și familii din Cluj care vor un cabinet în care să revină ani la rând."
+  benefits:
+    - "Aceeași echipă la fiecare vizită — fără rotație de medici."
+    - "Plan de tratament scris, cu costuri clare, înainte de orice manoperă."
+    - "Programări la oră fixă. Dacă întârziem noi, ședința e din partea noastră."
+    - "Tehnologie 3D pentru diagnostic și implantologie ghidată."
 
-
-# -----------------------------------------------------------------------------
-# 5. TRUST  — optional. Sections hide if empty.
-# -----------------------------------------------------------------------------
 trust:
   testimonials:
-    - quote: ""
-      name: ""
-      role: ""            # Optional. e.g. "Client din 2022"
-  gallery: ""              # Folder name in assets/, e.g. "gallery".
-                           # All images inside are shown in a grid.
+    - quote: "Prima dată într-un cabinet stomatologic unde nu m-am simțit grăbită. Dr. Pop mi-a explicat fiecare pas și am plătit exact cât scria pe plan."
+      name: "Ioana M."
+      role: "Pacient din 2022"
+    - quote: "Am venit cu copilul de 6 ani panicat. Am plecat cu el cerând să mai vină. Asta spune tot."
+      name: "Andrei T."
+      role: "Tată, pacient de 3 ani"
+    - quote: "Implantul făcut aici în 2021 nu mi-a dat niciun fir de bătaie de cap. Recomand cu încredere."
+      name: "Maria D."
+      role: ""
+  gallery: ""
 
-
-# -----------------------------------------------------------------------------
-# 6. VISUAL DIRECTION  — how the site should feel
-# -----------------------------------------------------------------------------
 visual:
-  reference_url: ""       # 1 site whose feel matches. Strongest signal.
-  vibe: ""                # 2-3 words. e.g. "warm minimal", "bold brutalist",
-                          #               "clinical premium", "earthy editorial"
-  brand_color: ""         # Hex like "#0E5C3A", or leave empty and I'll pick.
+  reference_url: "https://www.kingsleymontessori.com/"
+  vibe: "calm clinical premium"
+  brand_color: "#2F5D50"
 
-
-# -----------------------------------------------------------------------------
-# 7. META  — SEO basics
-# -----------------------------------------------------------------------------
 meta:
-  domain: ""              # Final domain, e.g. "smiledental.ro". Used for
-                          # canonical + sitemap. Custom domain assumed.
+  domain: "dentallumen.ro"

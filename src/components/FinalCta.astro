@@ -1,0 +1,39 @@
+---
+import { site } from "../lib/data";
+---
+
+<section class="relative overflow-hidden">
+  <img
+    src={site.images.finalCta}
+    alt=""
+    width="1600"
+    height="900"
+    loading="lazy"
+    decoding="async"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <div class="absolute inset-0 bg-brand-deep/85 mix-blend-multiply" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-brand/40 via-brand-deep/60 to-ink/70" aria-hidden="true"></div>
+
+  <div class="container-x relative py-24 md:py-32">
+    <div class="grid grid-cols-1 gap-y-10 md:grid-cols-12 md:gap-x-16 md:items-end">
+      <div class="md:col-span-8">
+        <h2 class="font-display text-[34px] leading-[1.1] tracking-tight text-paper md:text-[52px] lg:text-[60px]">
+          Sună azi. Te primim săptămâna asta.
+        </h2>
+        <p class="mt-5 max-w-prose text-[16px] leading-relaxed text-paper/80">
+          Programul nostru are timpi de consultație rezervați pentru pacienți noi în fiecare săptămână. Răspundem în aceeași zi de lucru, înainte de ora 19.
+        </p>
+      </div>
+      <div class="md:col-span-4 md:text-right">
+        <a
+          href={site.phoneHref}
+          class="inline-flex w-full items-center justify-center rounded-full bg-paper px-7 py-4 text-[15px] font-medium tracking-wide text-ink transition hover:bg-elevated md:w-auto"
+        >
+          {site.phone}
+        </a>
+        <p class="mt-3 text-[13px] text-paper/70">sau scrie la <a href={site.emailHref} class="underline underline-offset-4 hover:text-paper">{site.email}</a></p>
+      </div>
+    </div>
+  </div>
+</section>
