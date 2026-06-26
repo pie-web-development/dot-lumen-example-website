@@ -1,3 +1,11 @@
+export const url = (path: string = "/"): string => {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const clean = path.replace(/^\//, "").replace(/\/$/, "");
+  if (!clean) return `${base}/`;
+  const isFile = /\.[a-z0-9]+$/i.test(clean);
+  return isFile ? `${base}/${clean}` : `${base}/${clean}/`;
+};
+
 export interface Service {
   name: string;
   description: string;

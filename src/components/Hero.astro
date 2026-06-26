@@ -1,5 +1,5 @@
 ---
-import { site } from "../lib/data";
+import { site, url } from "../lib/data";
 ---
 
 <section class="relative overflow-hidden bg-paper">
@@ -14,7 +14,7 @@ import { site } from "../lib/data";
       </p>
       <div class="mt-9 flex flex-wrap items-center gap-3">
         <a href={site.phoneHref} class="btn-primary">Rezervă consultația</a>
-        <a href="/servicii" class="btn-ghost">Vezi serviciile</a>
+        <a href={url("/servicii")} class="btn-ghost">Vezi serviciile</a>
       </div>
     </div>
 

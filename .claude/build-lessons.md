@@ -86,6 +86,105 @@ Searching the built CSS for `#2F5D50` returns nothing. Tailwind emits `rgb(47 93
 
 ---
 
+## GitHub Pages deployment
+
+These all bit me on the first deploy of the Lumen example site. The five lessons interlock — fixing one without the others won't get you a working site.
+
+### 1. Pages defaults to Jekyll — even on a repo with no Jekyll files
+
+If the GitHub Pages **Source** is set to "Deploy from a branch" (the default), Pages runs `actions/jekyll-build-pages` on your repo. Jekyll walks every file and tries to parse anything starting with `---` as YAML front matter. **`.astro` component scripts start with `---`** (TypeScript/JS, not YAML), so Jekyll fails with `mapping values are not allowed in this context` on Nav.astro, Offering.astro, etc.
+
+**Fix:** in repo Settings → Pages → **Source**, switch to **"GitHub Actions"**. This stops Pages from running Jekyll at all and lets your own workflow build and publish.
+
+**Why:** Jekyll is GitHub Pages' historical default for static site generation, and it ignores `.nojekyll` when the build is initiated by Pages itself.
+
+### 2. `.nojekyll` alone does NOT stop the Jekyll build
+
+A common bad guess (mine, the first time): "add `.nojekyll` at the repo root, Jekyll will skip." Wrong. `.nojekyll` only tells Pages "don't run Jekyll on the **deployed** artifact" — it has no effect when Pages is configured to *build* with Jekyll. You still need to flip Source → GitHub Actions.
+
+Keep `.nojekyll` in `dist/` (or the repo root if also serving from a branch) as belt-and-braces — it's a one-line file and prevents future confusion if anyone toggles Pages config — but do not rely on it as the fix.
+
+### 3. Astro deploy workflow recipe
+
+Canonical workflow that works with Pages → "GitHub Actions" source. Save as `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy Astro site to Pages
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: false }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: ./dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+**Why:** the rollup-win32 bug doesn't hit on Linux, `npm ci` is reproducible against the lockfile, and the two-job split is the pattern GitHub's docs prescribe for the `deploy-pages` action.
+
+### 4. `base:` is required for `<user>.github.io/<repo>/` deploys
+
+CLAUDE.md says "custom domain assumed → don't add `base:`". That holds for the real client deploy (`dentallumen.ro`), but **not** for an example/test deploy under a project subpath like `https://<user>.github.io/dot-lumen-example-website/`. Without `base:`, Astro emits CSS/JS links as `/_astro/foo.css`, which resolves to the github.io root (404 — no CSS, unstyled site).
+
+Decision rule at scaffold time:
+- Custom domain (CNAME) → leave `base` out.
+- Project page on github.io → set `base: "/<repo-name>"` in `astro.config.mjs`.
+
+When the test deploy graduates to the custom domain, **remove** the `base:` line and (if applicable) update the `url()` helper imports — otherwise links will prefix `/<repo-name>` onto a domain root and 404.
+
+### 5. `import.meta.env.BASE_URL` mirrors `base` exactly — and Astro does NOT auto-prefix author-written hrefs
+
+Two traps in one.
+
+**Trap A — slash mirroring.** Whatever you write in `base:` is what `import.meta.env.BASE_URL` returns. `base: "/foo"` → BASE_URL = `"/foo"`; `base: "/foo/"` → BASE_URL = `"/foo/"`. Naïve concatenation breaks one way or the other. Write the helper so it works either way.
+
+**Trap B — author hrefs.** Astro auto-rewrites internal asset URLs (CSS bundles, `<Image>` src) under the base path, but it does **not** rewrite hand-written `href="/servicii"`, `<link rel="icon" href="/favicon.svg">`, or `<img src="/foo.jpg">`. Those stay literal and break.
+
+**Canonical form on GitHub Pages.** Pages serves directory-style URLs with a trailing slash: `/servicii/` not `/servicii`. Set `base: "/<repo>/"` (with trailing slash) and emit routes with trailing slashes so internal links match the canonical URLs Pages redirects to. File assets (anything with an extension) stay extension-bare.
+
+**Fix:** ship a tiny helper in `src/lib/data.ts` (alongside `site`, `services`, etc.) and route every author-written internal `href`/`src` through it:
+
+```ts
+export const url = (path: string = "/"): string => {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const clean = path.replace(/^\//, "").replace(/\/$/, "");
+  if (!clean) return `${base}/`;
+  const isFile = /\.[a-z0-9]+$/i.test(clean);
+  return isFile ? `${base}/${clean}` : `${base}/${clean}/`;
+};
+```
+
+Files to thread it through, every build: `layouts/Base.astro` (favicon), `components/Nav.astro` (items array + logo link), `components/Footer.astro` (nav links), every section component with an internal CTA (`Hero`, `AtmosphereBlock`, `FinalCta`, `PageHero`, ...), every `src/pages/*.astro` with an internal `<a>`. Mechanical audit before declaring done:
+
+```
+grep -rE 'href="/[a-z]' src/
+grep -rE 'src="/[a-z]'  src/
+```
+
+Both must return zero matches. If they don't, you'll ship a site that works on `npm run dev` (where `base` is `/`) but breaks under `base:` on Pages.
+
+---
+
 ## Pre-flight audit hot spots
 
 These are the Section 14 checks I have actually missed in the wild. Audit them mechanically — grep, don't eyeball.

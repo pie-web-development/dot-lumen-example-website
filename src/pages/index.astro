@@ -6,7 +6,7 @@ import Testimonials from "../components/Testimonials.astro";
 import AtmosphereBlock from "../components/AtmosphereBlock.astro";
 import FinalCta from "../components/FinalCta.astro";
 import Footer from "../components/Footer.astro";
-import { services } from "../lib/data";
+import { services, url } from "../lib/data";
 
 const featuredServices = services.slice(0, 3);
 ---
@@ -23,7 +23,7 @@ const featuredServices = services.slice(0, 3);
             Ce facem, pe scurt.
           </h2>
           <a
-            href="/servicii"
+            href={url("/servicii")}
             class="inline-flex items-center gap-2 text-[14px] font-medium text-brand hover:text-brand-deep"
           >
             Toate serviciile și prețurile
@@ -37,7 +37,7 @@ const featuredServices = services.slice(0, 3);
           {
             featuredServices.map((s, i) => (
               <li class="group">
-                <a href="/servicii" class="flex items-start gap-6 border-t border-hairline py-6 transition hover:bg-elevated/40 md:gap-10 md:py-8">
+                <a href={url("/servicii")} class="flex items-start gap-6 border-t border-hairline py-6 transition hover:bg-elevated/40 md:gap-10 md:py-8">
                   <span class="shrink-0 pt-1 font-sans text-[12px] tracking-[0.22em] text-muted">
                     {String(i + 1).padStart(2, "0")}
                   </span>

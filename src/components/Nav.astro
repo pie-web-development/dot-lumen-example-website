@@ -1,5 +1,5 @@
 ---
-import { site } from "../lib/data";
+import { site, url } from "../lib/data";
 
 interface Props {
   current?: "home" | "servicii" | "despre" | "contact";
@@ -7,10 +7,10 @@ interface Props {
 const { current = "home" } = Astro.props;
 
 const items: { label: string; href: string; key: NonNullable<Props["current"]> }[] = [
-  { label: "Acasă", href: "/", key: "home" },
-  { label: "Servicii", href: "/servicii", key: "servicii" },
-  { label: "De ce noi", href: "/despre", key: "despre" },
-  { label: "Contact", href: "/contact", key: "contact" },
+  { label: "Acasă", href: url("/"), key: "home" },
+  { label: "Servicii", href: url("/servicii"), key: "servicii" },
+  { label: "De ce noi", href: url("/despre"), key: "despre" },
+  { label: "Contact", href: url("/contact"), key: "contact" },
 ];
 ---
 
@@ -22,7 +22,7 @@ const items: { label: string; href: string; key: NonNullable<Props["current"]> }
 >
   <div class="container-x flex h-16 items-center justify-between md:h-[72px]">
     <a
-      href="/"
+      href={url("/")}
       class="font-display text-[20px] leading-none tracking-tight text-ink md:text-[22px]"
       aria-label={`${site.name}, mergi la pagina de start`}
     >

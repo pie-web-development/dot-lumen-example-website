@@ -1,5 +1,5 @@
 ---
-import { site } from "../lib/data";
+import { site, url } from "../lib/data";
 const year = new Date().getFullYear();
 ---
 
@@ -17,10 +17,10 @@ const year = new Date().getFullYear();
     <div class="md:col-span-3">
       <p class="eyebrow mb-4">Cabinet</p>
       <ul class="space-y-2 text-[14px] text-ink">
-        <li><a href="/" class="hover:text-brand">Acasă</a></li>
-        <li><a href="/servicii" class="hover:text-brand">Servicii</a></li>
-        <li><a href="/despre" class="hover:text-brand">De ce noi</a></li>
-        <li><a href="/contact" class="hover:text-brand">Contact</a></li>
+        <li><a href={url("/")} class="hover:text-brand">Acasă</a></li>
+        <li><a href={url("/servicii")} class="hover:text-brand">Servicii</a></li>
+        <li><a href={url("/despre")} class="hover:text-brand">De ce noi</a></li>
+        <li><a href={url("/contact")} class="hover:text-brand">Contact</a></li>
       </ul>
     </div>
 

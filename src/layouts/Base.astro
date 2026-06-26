@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { url } from "../lib/data";
 
 interface Props {
   title: string;
@@ -20,7 +21,7 @@ const metaDescription =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={url("/favicon.svg")} />
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
